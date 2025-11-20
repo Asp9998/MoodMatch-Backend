@@ -22,4 +22,3 @@ ENV PORT=8080
 
 # Start the Ktor server
 CMD ["./bin/moodmatch-backend"]
-
