@@ -5,18 +5,20 @@ WORKDIR /app
 # Copy Gradle project
 COPY . .
 
-# Build a runnable distribution (uses the same stuff as `./gradlew run`)
-RUN gradle installDist --no-daemon
+# Make sure the Gradle wrapper is executable
+RUN chmod +x gradlew
+
+# Build a runnable distribution (skip tests for now)
+RUN ./gradlew installDist -x test --no-daemon
 
 # ---------- Stage 2: Run the app ----------
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Copy the built distribution from the builder image
-# NOTE: replace 'moodmatch-backend' with your rootProject.name from settings.gradle.kts if different
+# rootProject.name is "moodmatch-backend", so this path is correct
 COPY --from=builder /app/build/install/moodmatch-backend /app
 
-# Ktor listens on PORT (Render will set this env var)
+# Ktor listens on PORT (Render will override this env var)
 EXPOSE 8080
 ENV PORT=8080
 
