@@ -131,5 +131,5 @@ private suspend fun tryMatch(
     )
 
     val textB = WsJson.encodeToString(WsEnvelopeDto.serializer(), envelopB)
-    sessionA.send(Frame.Text(textB))
+    sessionB.send(Frame.Text(textB))
 }
