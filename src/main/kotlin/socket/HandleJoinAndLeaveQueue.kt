@@ -125,7 +125,7 @@ private suspend fun tryMatch(
         }
     }
 
-    val envelopB = WsEnvelopeDto(
+    val envelopB = WsEnvelopeDto(   
         type = "match_found",
         payload = payloadB
     )

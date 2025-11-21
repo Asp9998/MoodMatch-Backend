@@ -43,6 +43,13 @@ suspend fun handleWsMessage(
             handleLeaveQueue(session, userId)
         }
 
+        "leave_room" -> {
+            leaveRoom(
+                session = session,
+                userId = userId
+            )
+        }
+
         "send_message" -> {
             handleSendMessage(session, userId, envelope)
         }
